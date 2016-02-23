@@ -7,20 +7,16 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# include_recipe 'yum-epel' # RHEL / Centos specific
-include_recipe 'sshd'
+# Enable Firewall
 include_recipe 'firewalld' # RHEL / Centos specific
 
-# package 'git'
-# package 'byobu'
-
-# Configure SSHD
+# Configure sshd
 openssh_server node['sshd']['config_file'] do
   cookbook 'lits_vm'
   source 'sshd_config.erb'
 end
 
-# Open HTTP to public (port 80)
+# Configure firewall
 firewalld_service 'http' do 
   action :add
   zone   'public'
