@@ -1,0 +1,1 @@
+default['lits_vm']['additional_packages'] = []

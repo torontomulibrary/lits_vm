@@ -21,3 +21,5 @@ firewalld_service 'http' do
   action :add
   zone   'public'
 end
+
+include_recipe 'lits_vm::additional_packages'
