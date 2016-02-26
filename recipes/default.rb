@@ -35,10 +35,14 @@ end
 # Install nginx
 include_recipe "nginx"
 
+# Node.js
+include_recipe 'nodejs'
+
 # Java
 include_recipe 'java'
 
 # Elasticsearch
 include_recipe 'elasticsearch'
+
 
 include_recipe 'lits_vm::additional_packages'
