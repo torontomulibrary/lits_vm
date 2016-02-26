@@ -7,19 +7,41 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# Enable Firewall
-include_recipe 'firewalld' # RHEL / Centos specific
-
 # Configure sshd
 openssh_server node['sshd']['config_file'] do
   cookbook 'lits_vm'
   source 'sshd_config.erb'
 end
 
+# # Enable Firewall
+# include_recipe 'firewalld' # RHEL / Centos specific
+
+# # Configure firewall
+# firewalld_service 'http' do 
+#   action :add
+#   zone   'public'
+# end
+
 # Configure firewall
-firewalld_service 'http' do 
-  action :add
-  zone   'public'
+firewall 'default' do
+  action :install
 end
+
+# Allow SSH so we don't lock ourselves out
+firewall_rule 'ssh' do
+  port     22
+  command  :allow
+  action :create
+end
+
+# Allow HTTP
+firewall_rule 'http' do
+  port     80
+  command  :allow
+  action :create
+end
+
+# Install nginx
+include_recipe "nginx"
 
 include_recipe 'lits_vm::additional_packages'
