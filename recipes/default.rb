@@ -32,6 +32,14 @@ firewall_rule 'http' do
   action :create
 end
 
+# Create and start MySQL instance
+mysql_service node['mysql']['service_name'] do
+  bind_address node['mysql']['bind_address']
+  version node['mysql']['version']
+  initial_root_password node['mysql']['initial_root_password']
+  action [:create, :start]
+end
+
 # Install nginx
 include_recipe "nginx"
 
