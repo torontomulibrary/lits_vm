@@ -16,3 +16,4 @@ depends 'java', '~> 1.39.0'
 # Refer to: https://github.com/elastic/cookbook-elasticsearch/tree/0.3.x
 depends 'elasticsearch', '~> 0.3.13'
 depends 'nodejs', '~> 2.4.4'
+depends 'mysql', '~> 6.1.2'
