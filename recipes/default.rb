@@ -13,15 +13,6 @@ openssh_server node['sshd']['config_file'] do
   source 'sshd_config.erb'
 end
 
-# # Enable Firewall
-# include_recipe 'firewalld' # RHEL / Centos specific
-
-# # Configure firewall
-# firewalld_service 'http' do 
-#   action :add
-#   zone   'public'
-# end
-
 # Configure firewall
 firewall 'default' do
   action :install
@@ -43,5 +34,11 @@ end
 
 # Install nginx
 include_recipe "nginx"
+
+# Java
+include_recipe 'java'
+
+# Elasticsearch
+include_recipe 'elasticsearch'
 
 include_recipe 'lits_vm::additional_packages'
