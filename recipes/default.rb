@@ -44,5 +44,4 @@ include_recipe 'java'
 # Elasticsearch
 include_recipe 'elasticsearch'
 
-
 include_recipe 'lits_vm::additional_packages'
