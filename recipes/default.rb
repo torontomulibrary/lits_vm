@@ -7,6 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# Enable EPEL repository
+include_recipe 'yum-epel'
+
 # Configure sshd
 openssh_server node['sshd']['config_file'] do
   cookbook 'lits_vm'
@@ -54,8 +57,13 @@ include_recipe 'java' if node['lits_vm']['install_java']
 # Elasticsearch
 include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
-# Install PHP
-include_recipe 'php' if node['lits_vm']['install_php']
+# Install PHP and extra packages
+if node['lits_vm']['install_php']
+  include_recipe 'php'
+  node['lits_vm']['php_packages'].each do |pkg|
+    package pkg
+  end
+end
 
 # Enable php-fpm
 php_fpm_pool "default" do

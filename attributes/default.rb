@@ -12,7 +12,10 @@ default['lits_vm']['install_elasticsearch'] = false
 default['lits_vm']['install_java'] = false
 
 default['lits_vm']['install_additional_packages'] = false
+
+# PHP
 default['lits_vm']['install_php'] = false
+default['lits_vm']['php_packages'] = []
 
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
