@@ -62,9 +62,7 @@ include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 # Install PHP and extra packages
 if node['lits_vm']['install_php']
   include_recipe 'php'
-  node['lits_vm']['php_packages'].each do |pkg|
-    package pkg
-  end
+  package node['lits_vm']['php_packages'] !node['lits_vm']['php_packages'].nil?
 end
 
 # Enable php-fpm
@@ -73,5 +71,4 @@ php_fpm_pool "default" do
   only_if { node['lits_vm']['install_php'] }
 end
 
-include_recipe 'lits_vm::additional_packages' if !node['lits_vm']['install_additional_packages'].nil?
-
+package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?

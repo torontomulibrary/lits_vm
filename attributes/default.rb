@@ -14,7 +14,7 @@ default['lits_vm']['install_java'] = false
 
 # PHP
 default['lits_vm']['install_php'] = false
-default['lits_vm']['php_packages'] = []
+default['lits_vm']['php_packages'] = nil
 
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
