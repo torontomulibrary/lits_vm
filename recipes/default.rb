@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+package %w(curl git)
+
 # Enable EPEL repository
 include_recipe 'yum-epel'
 
