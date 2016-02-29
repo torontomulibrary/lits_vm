@@ -1,5 +1,19 @@
 default['lits_vm']['additional_packages'] = []
 
+# TODO: include clase that forces this if nginx is enabled??
+default['lits_vm']['allow_web_traffic'] = false
+
+default['lits_vm']['install_mysql'] = false
+default['lits_vm']['install_nginx'] = false
+default['lits_vm']['install_nodejs'] = false
+
+default['lits_vm']['install_elasticsearch'] = false
+# TODO: include clase that forces java install if elasticsearch is enabled
+default['lits_vm']['install_java'] = false
+
+default['lits_vm']['install_additional_packages'] = false
+default['lits_vm']['install_php'] = false
+
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
 default['mysql']['bind_address'] = '127.0.0.1'

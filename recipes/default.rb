@@ -30,6 +30,7 @@ firewall_rule 'http' do
   port     80
   command  :allow
   action :create
+  only_if { node['lits_vm']['allow_web_traffic'] }
 end
 
 # Create and start MySQL instance
@@ -38,18 +39,29 @@ mysql_service node['mysql']['service_name'] do
   version node['mysql']['version']
   initial_root_password node['mysql']['initial_root_password']
   action [:create, :start]
+  only_if { node['lits_vm']['install_mysql'] }
 end
 
 # Install nginx
-include_recipe "nginx"
+include_recipe "nginx" if node['lits_vm']['install_nginx']
 
 # Node.js
-include_recipe 'nodejs'
+include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
 
 # Java
-include_recipe 'java'
+include_recipe 'java' if node['lits_vm']['install_java']
 
 # Elasticsearch
-include_recipe 'elasticsearch'
+include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
-include_recipe 'lits_vm::additional_packages'
+# Install PHP
+include_recipe 'php' if node['lits_vm']['install_php']
+
+# Enable php-fpm
+php_fpm_pool "default" do
+  action :install
+  only_if { node['lits_vm']['install_php'] }
+end
+
+include_recipe 'lits_vm::additional_packages' if node['lits_vm']['install_additional_packages']
+
