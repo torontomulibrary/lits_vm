@@ -71,5 +71,5 @@ php_fpm_pool "default" do
   only_if { node['lits_vm']['install_php'] }
 end
 
-include_recipe 'lits_vm::additional_packages' if node['lits_vm']['install_additional_packages']
+include_recipe 'lits_vm::additional_packages' if !node['lits_vm']['install_additional_packages'].nil?
 

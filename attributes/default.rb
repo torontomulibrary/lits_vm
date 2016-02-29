@@ -1,4 +1,4 @@
-default['lits_vm']['additional_packages'] = []
+default['lits_vm']['additional_packages'] = nil
 
 # TODO: include clase that forces this if nginx is enabled??
 default['lits_vm']['allow_web_traffic'] = false
@@ -11,7 +11,6 @@ default['lits_vm']['install_elasticsearch'] = false
 # TODO: include clase that forces java install if elasticsearch is enabled
 default['lits_vm']['install_java'] = false
 
-default['lits_vm']['install_additional_packages'] = false
 
 # PHP
 default['lits_vm']['install_php'] = false
