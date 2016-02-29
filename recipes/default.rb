@@ -52,6 +52,7 @@ include_recipe "nginx" if node['lits_vm']['install_nginx']
 
 # Node.js
 include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
+nodejs_npm node['lits_vm']['npm_modules'] if !node['lits_vm']['npm_modules'].nil?
 
 # Java
 include_recipe 'java' if node['lits_vm']['install_java']
