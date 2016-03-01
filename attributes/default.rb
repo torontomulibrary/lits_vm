@@ -15,10 +15,13 @@ default['lits_vm']['install_java'] = false
 
 # PHP
 default['lits_vm']['install_php'] = false
-default['lits_vm']['php_packages'] = nil
+default['lits_vm']['php_packages'] = []
 
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
 default['mysql']['bind_address'] = '127.0.0.1'
 default['mysql']['version'] = '5.5'
 default['mysql']['initial_root_password'] = 'a secure password'
+
+default['php']['fpm_user']      = 'nginx'
+default['php']['fpm_group']     = 'nginx'

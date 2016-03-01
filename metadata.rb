@@ -17,6 +17,6 @@ depends 'java', '~> 1.39.0'
 depends 'elasticsearch', '~> 0.3.13'
 depends 'nodejs', '~> 2.4.4'
 depends 'mysql', '~> 6.1.2'
-depends 'php', '~> 1.7.2'
+depends 'php', '~> 1.8.0'
 
 depends 'tar', '~> 0.7.0'
