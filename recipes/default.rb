@@ -76,7 +76,9 @@ include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 # end
 
 # Install php manually because the php cookbook doesn't work nicely with php-fpm???
-package %w(php php-fpm)
+%w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc).each do |pkg|
+  package pkg
+end
 
 package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
 
