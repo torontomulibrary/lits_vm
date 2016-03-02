@@ -60,25 +60,19 @@ include_recipe 'java' if node['lits_vm']['install_java']
 # Elasticsearch
 include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
-# # Install PHP and extra packages
-# if node['lits_vm']['install_php']
-#   include_recipe 'php'
-#   node['lits_vm']['php_packages'].each do |php_pkg|
-#     package php_pkg
-#   end
-#   # package node['lits_vm']['php_packages'] if !node['lits_vm']['php_packages'].nil?
-# end
-
-# # Enable php-fpm
-# php_fpm_pool "default" do
-#   action :install
-#   only_if { node['lits_vm']['install_php'] }
-# end
-
-# Install php manually because the php cookbook doesn't work nicely with php-fpm???
-%w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc).each do |pkg|
-  package pkg
+if node['lits_vm']['install_elasticsearch']
+  # Install php manually because the php cookbook doesn't work nicely with php-fpm???
+  %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
+    package pkg
+  end
+  
+  # Declare php-fpm service
+  service 'php-fpm' do
+    service_name 'php-fpm'
+    supports start: true, stop: true, restart: true, reload: true
+  end
 end
+
 
 package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
 
