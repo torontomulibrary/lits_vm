@@ -1,5 +1,7 @@
 default['lits_vm']['additional_packages'] = nil
 
+default['lits_vm']['permit_root_login'] = 'no'
+
 # TODO: include clase that forces this if nginx is enabled??
 default['lits_vm']['allow_web_traffic'] = false
 
