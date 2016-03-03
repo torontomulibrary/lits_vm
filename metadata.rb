@@ -27,4 +27,4 @@ depends 'tar', '~> 0.7.0'
 # the Chef core and other resources to make a cleaner, more lean recipe DSL, 
 # enforce DRY principles, and make writing Chef recipes an awesome experience!
 # http://sethvargo.github.io/chef-sugar/
-depends'chef-sugar', '~> 3.3.0'
+depends 'chef-sugar', '~> 3.3.0'
