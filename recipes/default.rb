@@ -52,6 +52,8 @@ if node['lits_vm']['install_nginx']
   include_recipe "nginx" 
   # create default web directory
   directory node['nginx']['default_root'] do
+    group node['nginx']['user']
+    owner node['nginx']['user']
     recursive true
   end
 end 

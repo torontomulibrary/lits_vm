@@ -27,6 +27,6 @@ default['mysql']['bind_address'] = '127.0.0.1'
 default['mysql']['version'] = '5.5'
 default['mysql']['initial_root_password'] = 'a secure password'
 
-default['php']['fpm_user']      = 'nginx'
-default['php']['fpm_group']     = 'nginx'
+default['php']['fpm_user']  = node['nginx']['user']
+default['php']['fpm_group'] = node['nginx']['user']
  
