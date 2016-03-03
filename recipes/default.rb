@@ -51,7 +51,9 @@ if node['lits_vm']['install_nginx']
   # Install nginx
   include_recipe "nginx" 
   # create default web directory
-  directory node['nginx']['default_root']
+  directory node['nginx']['default_root'] do
+    recursive true
+  end
 end 
 
 # Node.js
