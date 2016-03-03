@@ -13,9 +13,13 @@ default['lits_vm']['install_elasticsearch'] = false
 # TODO: include clase that forces java install if elasticsearch is enabled
 default['lits_vm']['install_java'] = false
 
+
 # PHP
 default['lits_vm']['install_php'] = false
 default['lits_vm']['php_packages'] = []
+
+# nginx
+default['nginx']['default_root'] = '/var/www/html'
 
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
@@ -25,3 +29,4 @@ default['mysql']['initial_root_password'] = 'a secure password'
 
 default['php']['fpm_user']      = 'nginx'
 default['php']['fpm_group']     = 'nginx'
+ 

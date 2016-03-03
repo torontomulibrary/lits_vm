@@ -47,8 +47,12 @@ mysql_service node['mysql']['service_name'] do
   only_if { node['lits_vm']['install_mysql'] }
 end
 
-# Install nginx
-include_recipe "nginx" if node['lits_vm']['install_nginx']
+if node['lits_vm']['install_nginx']
+  # Install nginx
+  include_recipe "nginx" 
+  # create default web directory
+  directory node['nginx']['default_root']
+end 
 
 # Node.js
 include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
