@@ -18,25 +18,25 @@ openssh_server node['sshd']['config_file'] do
   source 'sshd_config.erb'
 end
 
-# Configure firewall
-firewall 'default' do
-  action :install
-end
+# # Configure firewall
+# firewall 'default' do
+#   action :install
+# end
 
-# Allow SSH so we don't lock ourselves out
-firewall_rule 'ssh' do
-  port     22
-  command  :allow
-  action :create
-end
+# # Allow SSH so we don't lock ourselves out
+# firewall_rule 'ssh' do
+#   port     22
+#   command  :allow
+#   action :create
+# end
 
-# Allow HTTP
-firewall_rule 'http' do
-  port     80
-  command  :allow
-  action :create
-  only_if { node['lits_vm']['allow_web_traffic'] }
-end
+# # Allow HTTP
+# firewall_rule 'http' do
+#   port     80
+#   command  :allow
+#   action :create
+#   only_if { node['lits_vm']['allow_web_traffic'] }
+# end
 
 # Create and start MySQL instance
 mysql_service node['mysql']['service_name'] do
