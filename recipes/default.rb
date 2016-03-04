@@ -47,6 +47,7 @@ mysql_service node['mysql']['service_name'] do
   only_if { node['lits_vm']['install_mysql'] }
 end
 
+# Nginx
 if node['lits_vm']['install_nginx']
   # Install nginx
   include_recipe "nginx" 
@@ -68,6 +69,7 @@ include_recipe 'java' if node['lits_vm']['install_java']
 # Elasticsearch
 include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
+# PHP
 if node['lits_vm']['install_php']
   # Install php manually because the php cookbook doesn't work nicely with php-fpm???
   %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
@@ -81,6 +83,7 @@ if node['lits_vm']['install_php']
   end
 end
 
-package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
-
+# FFmpeg
 include_recipe 'lits_vm::install_ffmpeg' if node['lits_vm']['install_ffmpeg']
+
+package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
