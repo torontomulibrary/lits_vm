@@ -47,8 +47,17 @@ mysql_service node['mysql']['service_name'] do
   only_if { node['lits_vm']['install_mysql'] }
 end
 
-# Install nginx
-include_recipe "nginx" if node['lits_vm']['install_nginx']
+# Nginx
+if node['lits_vm']['install_nginx']
+  # Install nginx
+  include_recipe "nginx" 
+  # create default web directory
+  directory node['nginx']['default_root'] do
+    group node['nginx']['user']
+    owner node['nginx']['user']
+    recursive true
+  end
+end 
 
 # Node.js
 include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
@@ -60,7 +69,8 @@ include_recipe 'java' if node['lits_vm']['install_java']
 # Elasticsearch
 include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
-if node['lits_vm']['install_elasticsearch']
+# PHP
+if node['lits_vm']['install_php']
   # Install php manually because the php cookbook doesn't work nicely with php-fpm???
   %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
     package pkg
@@ -73,16 +83,7 @@ if node['lits_vm']['install_elasticsearch']
   end
 end
 
+# FFmpeg
+include_recipe 'lits_vm::install_ffmpeg' if node['lits_vm']['install_ffmpeg']
 
 package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
-
-#FFmpeg
-tar_extract 'http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz' do
-  target_dir '/usr/local'
-  compress_char ''
-  creates '/usr/local/ffmpeg-3.0-64bit-static'
-end
-
-link '/usr/local/bin/ffmpeg' do
-  to '/usr/local/ffmpeg-3.0-64bit-static/ffmpeg'
-end
