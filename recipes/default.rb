@@ -68,7 +68,7 @@ include_recipe 'java' if node['lits_vm']['install_java']
 # Elasticsearch
 include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
 
-if node['lits_vm']['install_elasticsearch']
+if node['lits_vm']['install_php']
   # Install php manually because the php cookbook doesn't work nicely with php-fpm???
   %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
     package pkg
