@@ -81,16 +81,6 @@ if node['lits_vm']['install_elasticsearch']
   end
 end
 
-
 package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
 
-#FFmpeg
-tar_extract 'http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz' do
-  target_dir '/usr/local'
-  compress_char ''
-  creates '/usr/local/ffmpeg-3.0-64bit-static'
-end
-
-link '/usr/local/bin/ffmpeg' do
-  to '/usr/local/ffmpeg-3.0-64bit-static/ffmpeg'
-end
+include_recipe 'lits_vm::install_ffmpeg' if node['lits_vm']['install_ffmpeg']

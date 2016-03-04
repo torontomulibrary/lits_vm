@@ -15,6 +15,7 @@ default['lits_vm']['install_elasticsearch'] = false
 # TODO: include clase that forces java install if elasticsearch is enabled
 default['lits_vm']['install_java'] = false
 
+default['lits_vm']['install_ffmpeg'] = false
 
 # PHP
 default['lits_vm']['install_php'] = false
