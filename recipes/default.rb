@@ -58,16 +58,21 @@ if node['lits_vm']['install_nginx']
     group node['nginx']['user']
     owner node['nginx']['user']
     recursive true
-    not_if { vagrant? }
   end
 
-  directory '/vagrant/www/' do
+  # Create /vagrant/www
+  directory "#{node['lits_vm']['vagrant_share']}/www/" do
     recursive true
     only_if { vagrant? }
   end
 
-  link '/var/www' do
-    to '/vagrant/www'
+  # Delete nginx directory and replace with symlink to vagrant share
+  directory node['nginx']['default_root'] do
+    action :delete
+    only_if { vagrant? }
+  end
+  link node['nginx']['default_root'] do
+    to "#{node['lits_vm']['vagrant_share']}/www/"
     only_if { vagrant? }
   end
 end

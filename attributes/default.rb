@@ -21,6 +21,9 @@ default['lits_vm']['install_ffmpeg'] = false
 default['lits_vm']['install_php'] = false
 default['lits_vm']['php_packages'] = []
 
+# Vagrant
+default['lits_vm']['vagrant_share'] = '/vagrant'
+
 # nginx
 default['nginx']['default_root'] = '/var/www/html'
 
