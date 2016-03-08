@@ -32,4 +32,3 @@ default['mysql']['initial_root_password'] = 'a secure password'
 
 default['php']['fpm_user']  = node['nginx']['user']
 default['php']['fpm_group'] = node['nginx']['user']
- 

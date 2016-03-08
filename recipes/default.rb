@@ -50,18 +50,18 @@ end
 # Nginx
 if node['lits_vm']['install_nginx']
   # Install nginx
-  include_recipe "nginx" 
+  include_recipe 'nginx'
   # create default web directory
   directory node['nginx']['default_root'] do
     group node['nginx']['user']
     owner node['nginx']['user']
     recursive true
   end
-end 
+end
 
 # Node.js
 include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
-nodejs_npm node['lits_vm']['npm_modules'] if !node['lits_vm']['npm_modules'].nil?
+nodejs_npm node['lits_vm']['npm_modules'] unless node['lits_vm']['npm_modules'].nil?
 
 # Java
 include_recipe 'java' if node['lits_vm']['install_java']
@@ -75,7 +75,6 @@ if node['lits_vm']['install_php']
   %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
     package pkg
   end
-  
   # Declare php-fpm service
   service 'php-fpm' do
     service_name 'php-fpm'
@@ -86,4 +85,4 @@ end
 # FFmpeg
 include_recipe 'lits_vm::install_ffmpeg' if node['lits_vm']['install_ffmpeg']
 
-package node['lits_vm']['additional_packages'] if !node['lits_vm']['additional_packages'].nil?
+package node['lits_vm']['additional_packages'] unless node['lits_vm']['additional_packages'].nil?
