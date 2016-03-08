@@ -8,6 +8,4 @@
 
 # Elasticsearch requires java
 include_recipe 'lits_vm::install_java'
-
-# Elasticsearch
 include_recipe 'elasticsearch'

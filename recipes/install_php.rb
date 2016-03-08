@@ -7,8 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# PHP
-# Install php manually because the php cookbook doesn't work nicely with php-fpm???
+# Install php manually because the php cookbook doesn't work nicely
+# with php-fpm
+# TODO: un-hardcode these packages
 %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
   package pkg
 end

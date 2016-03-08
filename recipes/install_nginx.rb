@@ -6,7 +6,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# Nginx
 include_recipe 'nginx'
 
 # Create default web directory

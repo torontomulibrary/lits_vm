@@ -7,5 +7,4 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# Java
 include_recipe 'java'
