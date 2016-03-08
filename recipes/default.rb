@@ -39,68 +39,8 @@ end
 #   only_if { node['lits_vm']['allow_web_traffic'] }
 # end
 
-# Create and start MySQL instance
-mysql_service node['mysql']['service_name'] do
-  bind_address node['mysql']['bind_address']
-  version node['mysql']['version']
-  initial_root_password node['mysql']['initial_root_password']
-  action [:create, :start]
-  only_if { node['lits_vm']['install_mysql'] }
+node['lits_vm']['components'].each do |component|
+  include_recipe "lits_vm::install_#{component}"
 end
-
-# Nginx
-if node['lits_vm']['install_nginx']
-  # Install nginx
-  include_recipe 'nginx'
-
-  # Create default web directory
-  directory node['nginx']['default_root'] do
-    group node['nginx']['user']
-    owner node['nginx']['user']
-    recursive true
-  end
-
-  # Create /vagrant/www
-  directory "#{node['lits_vm']['vagrant_share']}/www/" do
-    recursive true
-    only_if { vagrant? }
-  end
-
-  # Delete nginx directory and replace with symlink to vagrant share
-  directory node['nginx']['default_root'] do
-    action :delete
-    only_if { vagrant? }
-  end
-  link node['nginx']['default_root'] do
-    to "#{node['lits_vm']['vagrant_share']}/www/"
-    only_if { vagrant? }
-  end
-end
-
-# Node.js
-include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
-nodejs_npm node['lits_vm']['npm_modules'] unless node['lits_vm']['npm_modules'].nil?
-
-# Java
-include_recipe 'java' if node['lits_vm']['install_java']
-
-# Elasticsearch
-include_recipe 'elasticsearch' if node['lits_vm']['install_elasticsearch']
-
-# PHP
-if node['lits_vm']['install_php']
-  # Install php manually because the php cookbook doesn't work nicely with php-fpm???
-  %w(php php-fpm php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
-    package pkg
-  end
-  # Declare php-fpm service
-  service 'php-fpm' do
-    service_name 'php-fpm'
-    supports start: true, stop: true, restart: true, reload: true
-  end
-end
-
-# FFmpeg
-include_recipe 'lits_vm::install_ffmpeg' if node['lits_vm']['install_ffmpeg']
 
 package node['lits_vm']['additional_packages'] unless node['lits_vm']['additional_packages'].nil?
