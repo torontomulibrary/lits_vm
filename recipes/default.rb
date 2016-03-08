@@ -6,6 +6,7 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+include_recipe 'chef-sugar::default'
 
 package %w(curl git)
 
@@ -51,11 +52,23 @@ end
 if node['lits_vm']['install_nginx']
   # Install nginx
   include_recipe 'nginx'
-  # create default web directory
+
+  # Create default web directory
   directory node['nginx']['default_root'] do
     group node['nginx']['user']
     owner node['nginx']['user']
     recursive true
+    not_if { vagrant? }
+  end
+
+  directory '/vagrant/www/' do
+    recursive true
+    only_if { vagrant? }
+  end
+
+  link '/var/www' do
+    to '/vagrant/www'
+    only_if { vagrant? }
   end
 end
 
