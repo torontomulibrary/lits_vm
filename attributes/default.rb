@@ -1,10 +1,9 @@
 default['lits_vm']['additional_packages'] = nil
 default['lits_vm']['permit_root_login'] = 'no'
 default['lits_vm']['components'] = []
+
 # Vagrant
 default['lits_vm']['vagrant_share'] = '/vagrant'
-# nginx
-default['nginx']['default_root'] = '/var/www/html'
 
 # MySQL Service default configuration
 default['mysql']['service_name'] = 'default'
