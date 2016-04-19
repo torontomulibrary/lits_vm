@@ -22,26 +22,6 @@ end
 # Configure users
 include_recipe 'users::sysadmins'
 
-# # Configure firewall
-# firewall 'default' do
-#   action :install
-# end
-
-# # Allow SSH so we don't lock ourselves out
-# firewall_rule 'ssh' do
-#   port     22
-#   command  :allow
-#   action :create
-# end
-
-# # Allow HTTP
-# firewall_rule 'http' do
-#   port     80
-#   command  :allow
-#   action :create
-#   only_if { node['lits_vm']['allow_web_traffic'] }
-# end
-
 node['lits_vm']['components'].each do |component|
   include_recipe "lits_vm::install_#{component}"
 end
