@@ -21,6 +21,7 @@ end
 
 # Configure users
 include_recipe 'users::sysadmins'
+include_recipe 'sudo'
 
 node['lits_vm']['components'].each do |component|
   include_recipe "lits_vm::install_#{component}"
