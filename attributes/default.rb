@@ -16,3 +16,6 @@ default['php']['fpm_group'] = node['nginx']['user']
 
 # Disable default nginx site
 default['nginx']['default_site_enabled'] = false
+
+# sudos
+default['authorization']['sudo']['groups'] = ['sysadmin']
