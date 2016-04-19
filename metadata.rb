@@ -28,3 +28,6 @@ depends 'tar', '~> 0.7.0'
 # enforce DRY principles, and make writing Chef recipes an awesome experience!
 # http://sethvargo.github.io/chef-sugar/
 depends 'chef-sugar', '~> 3.3.0'
+
+depends 'users', '~> 2'
+depends 'sudo', '~> 2.9.0'
