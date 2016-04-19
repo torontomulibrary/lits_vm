@@ -19,6 +19,9 @@ openssh_server node['sshd']['config_file'] do
   source 'sshd_config.erb'
 end
 
+# Configure users
+include_recipe 'users::sysadmins'
+
 # # Configure firewall
 # firewall 'default' do
 #   action :install
