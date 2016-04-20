@@ -18,7 +18,11 @@ depends 'java', '~> 1.39.0'
 depends 'elasticsearch', '~> 0.3.13'
 
 depends 'nodejs', '~> 2.4.4'
+
 depends 'mysql', '~> 6.1.2'
+depends 'database', '~> 4.0.9'
+depends 'mysql2_chef_gem', '~> 1.0.2'
+
 depends 'php', '~> 1.8.0'
 
 depends 'tar', '~> 0.7.0'
