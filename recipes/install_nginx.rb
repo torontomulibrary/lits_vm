@@ -30,3 +30,14 @@ link node['nginx']['default_root'] do
   to "#{node['lits_vm']['vagrant_share']}/www/"
   only_if { vagrant? }
 end
+
+node['nginx']['sites_enabled'].each do |site, v|
+  nginx_site site do
+    template "#{site}.nginx.erb"
+    variables v
+  end
+end
+
+service 'nginx' do
+  action :reload
+end
