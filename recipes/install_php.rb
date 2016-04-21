@@ -21,13 +21,8 @@ service 'php-fpm' do
 end
 
 # Configure php-fpm pools
-template "#{node['php']['fpm_pooldir']}/atom.conf" do
-  source 'atom.php-fpm.erb'
-  notifies :restart, 'service[php-fpm]'
-end
-
 node['php']['fpm_pools'].each do |pool, v|
-  template "#{node['php']['fpm_pooldir']}/pool.conf" do
+  template "#{node['php']['fpm_pooldir']}/#{pool}.conf" do
     source "#{pool}.php-fpm.erb"
     variables v
     notifies :restart, 'service[php-fpm]'
