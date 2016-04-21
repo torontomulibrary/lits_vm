@@ -19,3 +19,12 @@ service 'php-fpm' do
   service_name 'php-fpm'
   supports start: true, stop: true, restart: true, reload: true
 end
+
+# Configure php-fpm pools
+node['php']['fpm_pools'].each do |pool, v|
+  template "#{node['php']['fpm_pooldir']}/#{pool}.conf" do
+    source "#{pool}.php-fpm.erb"
+    variables v
+    notifies :restart, 'service[php-fpm]'
+  end
+end

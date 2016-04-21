@@ -25,6 +25,8 @@ depends 'mysql2_chef_gem', '~> 1.0.2'
 
 depends 'tar', '~> 0.7.0'
 
+depends 'php', '~> 1.8.0'
+
 # Chef Sugar is a Gem & Chef Recipe that includes series of helpful sugar of
 # the Chef core and other resources to make a cleaner, more lean recipe DSL,
 # enforce DRY principles, and make writing Chef recipes an awesome experience!
