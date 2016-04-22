@@ -14,6 +14,9 @@ server {
 
   root <%= node['nginx']['default_root'] %>/<%= @root_directory %>;
 
+  access_log <%= node['nginx']['log_dir'] %>/ojs/access.log;
+  error_log <%= node['nginx']['log_dir'] %>/ojs/error.log;
+
   # http://wiki.nginx.org/HttpCoreModule#server_name
   # _ means catch any, but it's better if you replace this with your server
   # name, e.g. archives.foobar.com
