@@ -1,5 +1,5 @@
 upstream ojs {
-  server 127.0.0.1:9000;
+  server unix:/var/run/php-fpm.ojs.sock;
 }
 
 # This makes nginx return an empty response to requests that come from an invalid hostname
@@ -13,9 +13,6 @@ server {
   listen 80;
 
   root <%= node['nginx']['default_root'] %>/<%= @root_directory %>;
-
-  access_log <%= node['nginx']['log_dir'] %>/ojs/access.log;
-  error_log <%= node['nginx']['log_dir'] %>/ojs/error.log;
 
   # http://wiki.nginx.org/HttpCoreModule#server_name
   # _ means catch any, but it's better if you replace this with your server
