@@ -21,10 +21,12 @@ service 'php-fpm' do
 end
 
 # Configure php-fpm pools
-node['php']['fpm_pools'].each do |pool, v|
-  template "#{node['php']['fpm_pooldir']}/#{pool}.conf" do
-    source "#{pool}.php-fpm.erb"
-    variables v
-    notifies :restart, 'service[php-fpm]'
+unless node['php']['fpm_pools'].nil?
+  node['php']['fpm_pools'].each do |pool, v|
+    template "#{node['php']['fpm_pooldir']}/#{pool}.conf" do
+      source "#{pool}.php-fpm.erb"
+      variables v
+      notifies :restart, 'service[php-fpm]'
+    end
   end
 end

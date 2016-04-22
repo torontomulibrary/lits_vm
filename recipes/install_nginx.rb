@@ -31,10 +31,12 @@ link node['nginx']['default_root'] do
   only_if { vagrant? }
 end
 
-node['nginx']['sites_enabled'].each do |site, v|
-  nginx_site site do
-    template "#{site}.nginx.erb"
-    variables v
+unless node['nginx']['sites_enabled'].nil?
+  node['nginx']['sites_enabled'].each do |site, v|
+    nginx_site site do
+      template "#{site}.nginx.erb"
+      variables v
+    end
   end
 end
 

@@ -1,0 +1,46 @@
+upstream ojs {
+  server unix:/var/run/php-fpm.ojs.sock;
+}
+
+# This makes nginx return an empty response to requests that come from an invalid hostname
+server {
+  listen 80 default_server;
+  server_name _;
+  return 444;
+}
+
+server {
+  listen 80;
+
+  root <%= node['nginx']['default_root'] %>/<%= @root_directory %>;
+
+  # http://wiki.nginx.org/HttpCoreModule#server_name
+  # _ means catch any, but it's better if you replace this with your server
+  # name, e.g. archives.foobar.com
+  server_name <%= @server_name %>;
+
+  client_max_body_size 72M;
+
+  # http://wiki.nginx.org/HttpCoreModule#try_files
+  location / {
+    try_files $uri /index.php?$args;
+  }
+
+  location ~ /\. {
+    deny all;
+    return 404;
+  }
+
+  location ~ ^/(index)\.php(/|$) {
+    include /etc/nginx/fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    fastcgi_pass ojs;
+  }
+
+  location ~* \.php$ {
+    deny all;
+    return 404;
+  }
+
+}
