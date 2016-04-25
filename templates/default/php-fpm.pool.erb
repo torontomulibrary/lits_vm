@@ -1,22 +1,21 @@
-[atom]
+[<%= @pool_name %>]
 
 ; The user running the application
-user = nginx
-group = nginx
+user = <%= defined?(@user) ? @user : node['lits_vm']['fpm_pool_config']['user'] %>
+group = <%= defined?(@group) ? @group : node['lits_vm']['fpm_pool_config']['group'] %>
 
 ; Use UNIX sockets if Nginx and PHP-FPM are running in the same machine
-listen = /var/run/php-fpm.atom.sock
+listen = /var/run/php-fpm.<%= @pool_name %>.sock
 ; listen.owner = nginx
 ; listen.group = nginx
 ; listen.mode = 0600
 
 ; The following directives should be tweaked based in your hardware resources
 ; pm = dynamic
-pm = ondemand
+pm = <%= defined?(@pm.mode) ? @pm.mode : node['lits_vm']['fpm_pool_config']['pm']['mode'] %>
 
-; pm.max_children = 30
-pm.max_children = 10
-pm.process_idle_timeout = 10s
+pm.max_children = <%= defined?(@pm['max_children']) ? @pm['max_children'] : node['lits_vm']['fpm_pool_config']['pm']['max_children'] %>
+pm.process_idle_timeout = <%= defined?(@pm.process_idle_timeout) ? @pm.process_idle_timeout : node['lits_vm']['fpm_pool_config']['pm']['process_idle_timeout'] %>
 
 ;pm.start_servers = 10
 ;pm.min_spare_servers = 10
