@@ -9,8 +9,8 @@
 
 include_recipe 'php'
 
-# install php extensions
-%w(php-pdo php-mysql php-xml php-mbstring php-apc php-gearman php-ldap).each do |pkg|
+# Install extension packages
+node['lits_vm']['php_extension_packages'].each do |pkg|
   package pkg
 end
 
