@@ -1,3 +1,4 @@
+#
 # Cookbook Name:: lits_vm
 # Recipe:: install_nginx
 #
@@ -8,38 +9,21 @@
 
 include_recipe 'nginx'
 
-# Create default web directory
+# create empty default root directory
+directory '/var/www'
 directory node['nginx']['default_root'] do
-  group node['nginx']['user']
   owner node['nginx']['user']
-  recursive true
+  group node['nginx']['group']
 end
 
-# Create /vagrant/www
-directory "#{node['lits_vm']['vagrant_share']}/www/" do
-  recursive true
-  only_if { vagrant? }
+# create default server that sends empty response on bad hostname
+virtual_host 'default_server' do
+  listen '80 default'
+  server_name '_'
+  server_config [
+    { name: 'return', value: '444' }
+  ]
+  action [:create, :disable, :enable]
 end
 
-# Delete nginx directory and replace with symlink to vagrant share
-directory node['nginx']['default_root'] do
-  action :delete
-  only_if { vagrant? }
-end
-link node['nginx']['default_root'] do
-  to "#{node['lits_vm']['vagrant_share']}/www/"
-  only_if { vagrant? }
-end
-
-unless node['nginx']['sites_enabled'].nil?
-  node['nginx']['sites_enabled'].each do |site, v|
-    nginx_site site do
-      template "#{site}.nginx.erb"
-      variables v
-    end
-  end
-end
-
-service 'nginx' do
-  action :reload
-end
+include_recipe 'lits_vm::configure_nginx_sites' if node['lits_vm']['configure_nginx_sites']
