@@ -1,4 +1,8 @@
-default['lits_vm']['additional_packages'] = nil
+default['lits_vm']['users']['manage_groups'] = []
+
+default['lits_vm']['firewall']['allow_ports'] = {}
+
+default['lits_vm']['additional_packages'] = []
 
 # Vagrant
 default['lits_vm']['vagrant_share'] = '/vagrant'
