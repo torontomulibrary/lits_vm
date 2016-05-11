@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: lits_vm
-# Recipe:: install_nginx
+# Recipe:: nginx
 #
 # Copyright 2015, YOUR_COMPANY_NAME
 #
