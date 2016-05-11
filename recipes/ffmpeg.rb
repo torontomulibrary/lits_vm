@@ -1,5 +1,6 @@
+#
 # Cookbook Name:: lits_vm
-# Recipe:: install_ffmpeg
+# Recipe:: ffmpeg
 #
 # Copyright 2015, YOUR_COMPANY_NAME
 #

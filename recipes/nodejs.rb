@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: lits_vm
-# Recipe:: install_nodejs
+# Recipe:: nodejs
 #
 # Copyright 2015, YOUR_COMPANY_NAME
 #
@@ -8,4 +8,5 @@
 #
 
 include_recipe 'nodejs'
+
 nodejs_npm node['lits_vm']['npm_modules'] unless node['lits_vm']['npm_modules'].nil?
