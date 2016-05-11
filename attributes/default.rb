@@ -2,7 +2,7 @@ default['lits_vm']['users']['manage_groups'] = []
 
 default['lits_vm']['firewall']['allow_ports'] = {}
 
-default['base_vm']['configure_nginx_sites'] = false
+default['lits_vm']['configure_nginx_sites'] = true
 
 default['lits_vm']['additional_packages'] = []
 
