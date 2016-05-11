@@ -39,6 +39,7 @@ search("#{node.name}_nginx", '*:* AND NOT disable:true') do |nginx_site|
 
   virtual_host nginx_site['id'] do
     php_fpm_socket "unix:/var/run/php5-fpm.#{nginx_site['fpm_pool']}.sock"
+    server_name nginx_site['server_name']
     server_config site_server_config
     location_blocks nginx_site['location_blocks']
     action [:create, :disable, :enable]
