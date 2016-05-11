@@ -9,12 +9,6 @@ default['lits_vm']['additional_packages'] = []
 # Vagrant
 default['lits_vm']['vagrant_share'] = '/vagrant'
 
-# MySQL Service default configuration
-default['mysql']['service_name'] = 'default'
-default['mysql']['bind_address'] = '127.0.0.1'
-default['mysql']['version'] = '5.5'
-default['mysql']['initial_root_password'] = 'a secure password'
-
 # PHP stuff
 default['lits_vm']['php_extension_packages'] = []
 
