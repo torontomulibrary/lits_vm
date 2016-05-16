@@ -34,12 +34,18 @@ search("#{node.name}_nginx", '*:* AND NOT disable:true') do |nginx_site|
     { name: 'access_log', value: access_log },
     { name: 'error_log', value: error_log }
   ]
+
+  # remove items with empty values
+  site_server_config.select! do |server_config|
+    !server_config[:value].empty?
+  end
+
   site_server_config += nginx_site['server_config'] unless nginx_site['server_config'].nil?
 
   if rhel?
-    php_fpm_socket = "unix:/var/run/php-fpm.#{nginx_site['fpm_pool']}.sock"
+    php_fpm_socket = "unix:/var/run/php-fpm.#{nginx_site['fpm_pool']}.sock" unless nginx_site['fpm_pool'].nil?
   elsif debian?
-    php_fpm_socket = "unix:/var/run/php5-fpm.#{nginx_site['fpm_pool']}.sock"
+    php_fpm_socket = "unix:/var/run/php5-fpm.#{nginx_site['fpm_pool']}.sock" unless nginx_site['fpm_pool'].nil?
   end
 
   virtual_host nginx_site['id'] do
