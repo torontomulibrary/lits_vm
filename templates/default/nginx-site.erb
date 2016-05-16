@@ -1,0 +1,21 @@
+<% unless @php_fpm_socket.nil? %>
+upstream php_fpm {
+  server <%= @php_fpm_socket %>;
+}
+
+<% end %>
+server {
+  listen <%= @listen %>;
+  server_name <%= @server_name %>;
+  <% @server_config.each do |config| %>
+  <%= config[:name] %> <%= config[:value] %>;
+  <% end %>
+  <% @location_blocks.each do |location| %>
+
+  location <%= location[:matcher] %> {
+    <% location[:directives].each do |directive| %>
+    <%= directive[:name] %> <%= directive[:value] %>;
+    <% end %>
+  }
+  <% end %>
+}

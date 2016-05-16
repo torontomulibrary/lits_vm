@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: lits_vm
-# Recipe:: install_php
+# Recipe:: php
 #
 # Copyright 2015, YOUR_COMPANY_NAME
 #
@@ -14,15 +14,12 @@ node['lits_vm']['php_extension_packages'].each do |pkg|
   package pkg
 end
 
-# configure pools
-unless node['php']['fpm_pools'].nil?
-  node['php']['fpm_pools'].each do |pool|
-    php_fpm_pool pool['pool_name'] do
-      listen pool['listen']
-      process_manager pool['process_manager']
-      max_children pool['max_children']
-      additional_config pool['additional_config']
-    end
+search("#{node.name}_fpm_pool", '*:*') do |fpm_pool|
+  php_fpm_pool fpm_pool['id'] do
+    listen fpm_pool['listen']
+    process_manager fpm_pool['process_manager']
+    max_children fpm_pool['max_children']
+    additional_config fpm_pool['additional_config']
   end
 end
 
