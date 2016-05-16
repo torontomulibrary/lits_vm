@@ -6,6 +6,8 @@ default['lits_vm']['configure_nginx_sites'] = true
 
 default['lits_vm']['additional_packages'] = []
 
+default['lits_vm']['npm_modules'] = []
+
 # Vagrant
 default['lits_vm']['vagrant_share'] = '/vagrant'
 

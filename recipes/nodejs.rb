@@ -9,4 +9,4 @@
 
 include_recipe 'nodejs'
 
-nodejs_npm node['lits_vm']['npm_modules'] unless node['lits_vm']['npm_modules'].nil?
+nodejs_npm node['lits_vm']['npm_modules']
