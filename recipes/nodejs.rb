@@ -9,4 +9,6 @@
 
 include_recipe 'nodejs'
 
-nodejs_npm node['lits_vm']['npm_modules']
+node['lits_vm']['npm_modules'].each do |npm_package|
+  nodejs_npm npm_package
+end
