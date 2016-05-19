@@ -14,12 +14,18 @@ node['lits_vm']['php_extension_packages'].each do |pkg|
   package pkg
 end
 
-search("#{node.name}_fpm_pool", '*:*') do |fpm_pool|
-  php_fpm_pool fpm_pool['id'] do
-    listen fpm_pool['listen']
-    process_manager fpm_pool['process_manager']
-    max_children fpm_pool['max_children']
-    additional_config fpm_pool['additional_config']
+begin
+  search("#{node.name}_fpm_pool", '*:*') do |fpm_pool|
+    php_fpm_pool fpm_pool['id'] do
+      listen fpm_pool['listen']
+      process_manager fpm_pool['process_manager']
+      max_children fpm_pool['max_children']
+      additional_config fpm_pool['additional_config']
+    end
+  end
+rescue Net::HTTPServerException, Chef::Exceptions::InvalidDataBagPath
+  log "#{node.name}_fpm_pool data bag not found" do
+    level :info
   end
 end
 
