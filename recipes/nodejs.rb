@@ -14,5 +14,7 @@ nodejs_npm 'npm' do
 end
 
 node['lits_vm']['npm_modules'].each do |npm_package|
-  nodejs_npm npm_package
+  nodejs_npm npm_package['name'] do
+    version npm_package['version']
+  end
 end
