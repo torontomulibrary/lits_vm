@@ -42,5 +42,12 @@ node['lits_vm']['firewall']['allow_ports'].each do |name, port|
   end
 end
 
+# if RHEL/CentOS set permanent
+if rhel?
+  firewall 'default' do
+    action :save
+  end
+end
+
 # Install specified additional packages
 package node['lits_vm']['additional_packages']

@@ -22,4 +22,5 @@ default['authorization']['sudo']['groups'] = ['sysadmin']
 
 ## Do not edit below!
 default['firewall']['allow_ssh'] = true
+default['firewall']['firewalld']['permanent'] = true
 default['nginx']['default_site_enabled'] = false
