@@ -9,13 +9,6 @@
 
 include_recipe 'chef_nginx'
 
-# create empty default root directory
-directory '/var/www'
-directory node['nginx']['default_root'] do
-  owner node['nginx']['user']
-  group node['nginx']['group']
-end
-
 # Configure nginx sites from data bags
 begin
   search("#{node.name}_bags", 'bag_type:nginx_site') do |ns|
