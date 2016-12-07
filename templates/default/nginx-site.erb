@@ -1,21 +1,23 @@
-<% unless @php_fpm_socket.nil? %>
-upstream php_fpm {
-  server <%= @php_fpm_socket %>;
+<% @blocks[:upstream].each do |upstream| %>
+upstream <%= upstream[:name] %> {
+  <% upstream[:config].each do |config| %>
+  <%= config[:directive] %> <%= config[:value] %>;
+  <% end unless upstream[:config].nil? %>
 }
 
-<% end %>
-server {
-  listen <%= @listen %>;
-  server_name <%= @server_name %>;
-  <% @server_config.each do |config| %>
-  <%= config[:name] %> <%= config[:value] %>;
-  <% end %>
-  <% @location_blocks.each do |location| %>
-
-  location <%= location[:matcher] %> {
-    <% location[:directives].each do |directive| %>
-    <%= directive[:name] %> <%= directive[:value] %>;
-    <% end %>
+<% end unless @blocks[:upstream].nil? %>
+<% @blocks[:server].each do |server| %>
+server { 
+  <% server[:config].each do |config| %>
+  <%= config[:directive] %> <%= config[:value] %>;
+  <% end unless server[:config].nil? %>
+  <% server[:location_blocks].each do |location_block| %>
+  location <%= location_block[:matcher] %> {
+    <% location_block[:config].each do |config| %>
+      <%= config[:directive] %> <%= config[:value] %>;
+    <% end unless location_block[:config].nil? %>
   }
-  <% end %>
+  <% end unless server[:location_blocks].nil? %>
 }
+
+<% end unless @blocks[:server].nil? %>

@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'nginx'
+include_recipe 'chef_nginx'
 
 # create empty default root directory
 directory '/var/www'
@@ -16,14 +16,19 @@ directory node['nginx']['default_root'] do
   group node['nginx']['group']
 end
 
-# create default server that sends empty response on bad hostname
-virtual_host 'default_server' do
-  listen '80 default'
-  server_name '_'
-  server_config [
-    { name: 'return', value: '444' }
-  ]
-  action [:create, :disable, :enable]
+# Configure nginx sites from data bags
+begin
+  search("#{node.name}_bags", 'bag_type:nginx_site') do |ns|
+    nginx_site ns['name'] do
+      template 'nginx-site.erb'
+      variables(
+        blocks: ns['blocks']
+      )
+      action :enable
+    end
+  end
+rescue Net::HTTPServerException, Chef::Exceptions::InvalidDataBagPath
+  log "#{node.name}_nginx data bag not found" do
+    level :info
+  end
 end
-
-include_recipe 'lits_vm::configure_nginx_sites' if node['lits_vm']['configure_nginx_sites']
