@@ -15,8 +15,8 @@ node['lits_vm']['php_extension_packages'].each do |pkg|
 end
 
 begin
-  search("#{node.name}_fpm_pool", '*:*') do |fpm_pool|
-    php_fpm_pool fpm_pool['id'] do
+  search("#{node.name}_bags", 'bag_type:fpm_pool') do |fpm_pool|
+    php_fpm_pool fpm_pool['name'] do
       listen fpm_pool['listen']
       process_manager fpm_pool['process_manager']
       max_children fpm_pool['max_children']
