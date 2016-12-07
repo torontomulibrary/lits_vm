@@ -22,7 +22,14 @@ include_recipe 'yum-epel' if rhel?
 package %w(curl git)
 
 # Configure sysadmin users
-include_recipe 'users::sysadmins'
+
+# Searches data bag "users" for groups attribute "sysadmin".
+# Places returned users in Unix group "sysadmin" with GID 2300.
+users_manage 'sysadmin' do
+  group_id 2300
+  action [:remove, :create]
+end
+
 include_recipe 'sudo'
 
 # Configure additional non-sudo users
