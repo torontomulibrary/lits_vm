@@ -8,6 +8,9 @@
 #
 
 include_recipe 'chef_nginx'
+directory node['nginx']['default_root'] do
+  recursive true
+end
 
 # Configure nginx sites from data bags
 begin
