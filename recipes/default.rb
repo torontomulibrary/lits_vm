@@ -18,6 +18,9 @@ include_recipe 'chef-sugar'
 include_recipe 'apt' if debian?
 include_recipe 'yum-epel' if rhel?
 
+# Include nodejs by default
+include_recipe 'nodejs'
+
 # Always install these two packages just because.
 package %w(curl git)
 
