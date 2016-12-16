@@ -18,11 +18,21 @@ include_recipe 'chef-sugar'
 include_recipe 'apt' if debian?
 include_recipe 'yum-epel' if rhel?
 
+# Include nodejs by default
+include_recipe 'nodejs'
+
 # Always install these two packages just because.
 package %w(curl git)
 
 # Configure sysadmin users
-include_recipe 'users::sysadmins'
+
+# Searches data bag "users" for groups attribute "sysadmin".
+# Places returned users in Unix group "sysadmin" with GID 2300.
+users_manage 'sysadmin' do
+  group_id 2300
+  action [:remove, :create]
+end
+
 include_recipe 'sudo'
 
 # Configure additional non-sudo users
