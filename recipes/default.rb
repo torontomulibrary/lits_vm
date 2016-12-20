@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'sshd'
+include_recipe 'ssh-hardening::server'
 
 # Chef Sugar is a Gem & Chef Recipe that includes series of helpful sugar of
 # the Chef core and other resources to make a cleaner, more lean recipe DSL,

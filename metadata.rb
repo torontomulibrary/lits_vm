@@ -4,9 +4,10 @@ maintainer_email 'patrick@makestuffdostuff.com'
 license          'All rights reserved'
 description      'Configures a base VM for installing applications'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.2'
+version          '0.3.3'
 
 depends 'sshd', '~> 1.3.0'
+depends 'ssh-hardening', '~> 1.3.0'
 
 # Chef Sugar is a Gem & Chef Recipe that includes series of helpful sugar of
 # the Chef core and other resources to make a cleaner, more lean recipe DSL,

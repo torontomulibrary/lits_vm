@@ -3,6 +3,10 @@ lits_vm CHANGELOG
 
 This file is used to list changes made in each version of the lits_vm cookbook.
 
+0.3.3
+-----
+- Use ssh-hardening cookbook to configure secure sshd
+
 0.3.2
 - Use attribute "packages" rather than "additional_packages" to specifiy packages to be installed.
 
