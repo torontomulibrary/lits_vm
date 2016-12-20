@@ -7,13 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# Install PHP using the community cookbook
 include_recipe 'php'
 
-# Install extension packages
-node['lits_vm']['php_extension_packages'].each do |pkg|
-  package pkg
-end
-
+# Configure FPM pools
 begin
   search("#{node.name}_bags", 'bag_type:fpm_pool') do |fpm_pool|
     php_fpm_pool fpm_pool['name'] do
