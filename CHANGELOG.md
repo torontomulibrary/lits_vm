@@ -3,6 +3,9 @@ lits_vm CHANGELOG
 
 This file is used to list changes made in each version of the lits_vm cookbook.
 
+0.3.2
+- Use attribute "packages" rather than "additional_packages" to specifiy packages to be installed.
+
 0.3.1
 -----
 - Added option to install PHP from Webtatic repository for EL machines
