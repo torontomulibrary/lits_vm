@@ -6,14 +6,9 @@ default['lits_vm']['configure_nginx_sites'] = true
 
 default['lits_vm']['additional_packages'] = []
 
-default['lits_vm']['npm_modules'] = []
-
-# Vagrant
-default['lits_vm']['vagrant_share'] = '/vagrant'
+default['lits_vm']['enable_webtatic'] = false
 
 # PHP stuff
-default['lits_vm']['php_extension_packages'] = []
-
 default['php']['fpm_user']  = node['nginx']['user']
 default['php']['fpm_group'] = node['nginx']['user']
 

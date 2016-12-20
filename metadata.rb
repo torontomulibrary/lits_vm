@@ -4,7 +4,7 @@ maintainer_email 'patrick@makestuffdostuff.com'
 license          'All rights reserved'
 description      'Configures a base VM for installing applications'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.3.0'
+version          '0.3.1'
 
 depends 'sshd', '~> 1.3.0'
 
@@ -16,6 +16,7 @@ depends 'chef-sugar', '~> 3.4.0'
 
 depends 'apt', '>= 0.0.0'
 depends 'yum-epel', '>= 0.0.0'
+depends 'yum-webtatic', '>=0.0.0'
 
 depends 'users', '~> 4.0.3'
 depends 'sudo', '~> 3.1.0'

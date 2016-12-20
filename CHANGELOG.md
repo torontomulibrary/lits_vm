@@ -3,6 +3,15 @@ lits_vm CHANGELOG
 
 This file is used to list changes made in each version of the lits_vm cookbook.
 
+0.3.1
+-----
+- Added option to install PHP from Webtatic repository for EL machines
+- Delegate responsibility of installing packages for PHP to the php community cookbook
+
+0.3.0
+-----
+- Make the databag configuration more sane
+
 0.2.0
 -----
 - Update the default recipe to always install firewall

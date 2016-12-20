@@ -16,23 +16,26 @@ include_recipe 'sshd'
 include_recipe 'chef-sugar'
 
 include_recipe 'apt' if debian?
-include_recipe 'yum-epel' if rhel?
 
-# Include nodejs by default
+# Enable Extra Packages for Enterprise Linux
+if rhel?
+  include_recipe 'yum-epel'
+  include_recipe 'yum-webtatic' if node['lits_vm']['enable_webtatic']
+end
+
+# Install Node.js
 include_recipe 'nodejs'
 
-# Always install these two packages just because.
+# Always install curl and git because we need them all the time
 package %w(curl git)
 
 # Configure sysadmin users
-
 # Searches data bag "users" for groups attribute "sysadmin".
 # Places returned users in Unix group "sysadmin" with GID 2300.
 users_manage 'sysadmin' do
   group_id 2300
   action [:remove, :create]
 end
-
 include_recipe 'sudo'
 
 # Configure additional non-sudo users
@@ -51,13 +54,10 @@ node['lits_vm']['firewall']['allow_ports'].each do |name, port|
     command :allow
   end
 end
-
-# if RHEL/CentOS set permanent
-if rhel?
-  firewall 'default' do
-    action :save
-  end
-end
+# Set permanent firewall rules if RHEL
+firewall 'default' do
+  action :save
+end if rhel?
 
 # Install specified additional packages
 package node['lits_vm']['additional_packages']
