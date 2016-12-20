@@ -26,8 +26,8 @@ end
 # Install Node.js
 include_recipe 'nodejs'
 
-# Always install curl and git because we need them all the time
-package %w(curl git)
+# Install packages
+package node['lits_vm']['packages']
 
 # Configure sysadmin users
 # Searches data bag "users" for groups attribute "sysadmin".
@@ -58,6 +58,3 @@ end
 firewall 'default' do
   action :save
 end if rhel?
-
-# Install specified additional packages
-package node['lits_vm']['additional_packages']
