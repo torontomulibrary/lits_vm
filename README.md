@@ -1,5 +1,4 @@
 # lits_vm Cookbook
-=============
 This cookbook configures a server to install applications on. Currently only tested on CentOS 7.x, but should work on RHEL 7.x as well.
 
 ## Requirements
