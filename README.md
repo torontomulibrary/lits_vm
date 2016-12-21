@@ -48,19 +48,17 @@ Include the default recipe in a run list. The default recipe does the following:
 * Installs Node.js (TODO: make this optional and disabled by default)
 
 ### elasticsearch
-This recipe installs elasticsearch (requires Java)
+This recipe installs elasticsearch (requires Java).
 
 ### ffmpeg
-This recipe installs ffmpeg
+This recipe installs ffmpeg.
 
 ### java
-This recipe installs Java
+This recipe installs Java.
 
 ### mysql
-This recipe installs and configures MySQL databases using data bags
-
-#### Data Bag Definition
-A sample MySQL object in a data bag would look like:
+This recipe installs and configures MySQL databases using data bags.
+A sample mysql_service data bag would look like:
 ```json
 {
   "bag_type" : "mysql_service",
@@ -83,7 +81,8 @@ A sample MySQL object in a data bag would look like:
 ```
 
 ### nginx
-This recipe installs and configures Nginx using data bags
+This recipe installs and configures Nginx using data bags.
+A sample nginx_site data bag would look like:
 ```json
 {
   "bag_type" : "nginx_site",
@@ -104,7 +103,8 @@ This recipe installs and configures Nginx using data bags
 ```
 
 ### php
-This recipe installs and configures PHP and PHP-FPM using data bags
+This recipe installs and configures PHP and PHP-FPM using data bags.
+A sample fpm_pool data bag would look like:
 ```json
 {
   "bag_type" : "fpm_pool",
