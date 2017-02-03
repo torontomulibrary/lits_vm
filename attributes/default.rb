@@ -15,4 +15,4 @@ default['firewall']['firewalld']['permanent'] = true
 default['nginx']['default_site_enabled'] = false
 
 # when this is set to false, knife zero doesn't work!
-default['ssh-hardening']['ssh']['server']['allow_tcp_forwarding'] = true
+default['ssh']['allow_tcp_forwarding']    = false   # sshd
