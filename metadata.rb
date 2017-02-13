@@ -25,6 +25,7 @@ depends 'sudo', '~> 3.1.0'
 depends 'firewall', '~> 2.5.3'
 
 depends 'chef_nginx', '~> 4.0.2'
+depends 'acme', '~> 2.0.0'
 
 depends 'mysql', '~> 6.1.2'
 depends 'database', '~> 4.0.9'
