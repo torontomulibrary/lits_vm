@@ -54,7 +54,8 @@ node['lits_vm']['firewall']['allow_ports'].each do |name, port|
     command :allow
   end
 end
+
 # Set permanent firewall rules if RHEL
 firewall 'default' do
-  action :save
+  action [:save, :restart]
 end if rhel?
