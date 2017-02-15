@@ -16,7 +16,7 @@ end
 
 begin
   search("#{node.name}_bags", 'bag_type:nginx_site') do |ns|
-    # create log files
+    # create log files if missing
     file "/var/log/nginx/#{ns['name']}.access.log" do
       owner node['nginx']['user']
       group node['nginx']['group']
@@ -35,16 +35,6 @@ begin
       crt "/etc/ssl/#{ns['hostname']}.crt"
       key "/etc/ssl/#{ns['hostname']}.key"
       not_if { ns['hostname'].nil? }
-    end if ns['ssl']
-
-    # Webdir + index for LetsEncrypt to verify
-    directory ns['wwwroot'] do
-      owner node['nginx']['user']
-      group node['nginx']['group']
-      recursive true
-    end if ns['ssl']
-    cookbook_file "#{ns['wwwroot']}/index.html" do
-      source 'index.html'
     end if ns['ssl']
 
     nginx_site ns['name'] do
