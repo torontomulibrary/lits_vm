@@ -3,6 +3,10 @@ lits_vm CHANGELOG
 
 This file is used to list changes made in each version of the lits_vm cookbook.
 
+0.4.0
+-----
+- Feature: added ability to configure of SSL via databags
+
 0.3.5
 -----
 - Fix: update sshd configuration to allow us to use knife zero to provision
