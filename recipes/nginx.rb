@@ -40,7 +40,7 @@ begin
     nginx_site site['name'] do
       template 'nginx-site.erb'
       variables(
-        blocks: ns['blocks']
+        blocks: site['blocks']
       )
       action :enable
       notifies :reload, 'service[nginx]', :immediately
