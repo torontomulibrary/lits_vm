@@ -15,15 +15,15 @@ directory node['nginx']['default_root'] do
 end
 
 begin
-  search("#{node.name}_bags", 'bag_type:nginx_site') do |ns|
+  search("#{node.name}_bags", 'bag_type:nginx_site') do |site|
     # create log files if missing
-    file "/var/log/nginx/#{ns['name']}.access.log" do
+    file "/var/log/nginx/#{site['name']}.access.log" do
       owner node['nginx']['user']
       group node['nginx']['group']
       mode '644'
       action :create_if_missing
     end
-    file "/var/log/nginx/#{ns['name']}.error.log" do
+    file "/var/log/nginx/#{site['name']}.error.log" do
       owner node['nginx']['user']
       group node['nginx']['group']
       mode '644'
@@ -31,13 +31,13 @@ begin
     end
 
     # Self-signed certificate
-    acme_selfsigned ns['hostname'] do
-      crt "/etc/ssl/#{ns['hostname']}.crt"
-      key "/etc/ssl/#{ns['hostname']}.key"
-      not_if { ns['hostname'].nil? }
-    end if ns['ssl_enabled']
+    acme_selfsigned site['hostname'] do
+      crt "/etc/ssl/#{site['hostname']}.crt"
+      key "/etc/ssl/#{site['hostname']}.key"
+      not_if { site['hostname'].nil? }
+    end if site['ssl_enabled']
 
-    nginx_site ns['name'] do
+    nginx_site site['name'] do
       template 'nginx-site.erb'
       variables(
         blocks: ns['blocks']
@@ -47,15 +47,15 @@ begin
     end
 
     # Request the real certificate!
-    acme_certificate ns['hostname'] do
-      fullchain "/etc/ssl/#{ns['hostname']}.crt"
-      chain     "/etc/ssl/#{ns['hostname']}-chain.crt"
-      key       "/etc/ssl/#{ns['hostname']}.key"
-      wwwroot   ns['wwwroot']
+    acme_certificate site['hostname'] do
+      fullchain "/etc/ssl/#{site['hostname']}.crt"
+      chain     "/etc/ssl/#{site['hostname']}-chain.crt"
+      key       "/etc/ssl/#{site['hostname']}.key"
+      wwwroot   site['wwwroot']
       owner node['nginx']['user']
       group node['nginx']['group']
       notifies :reload, 'service[nginx]'
-    end if ns['ssl_enabled']
+    end if site['ssl_enabled']
   end
 rescue Net::HTTPServerException, Chef::Exceptions::InvalidDataBagPath
   log "#{node.name}_nginx data bag not found" do
