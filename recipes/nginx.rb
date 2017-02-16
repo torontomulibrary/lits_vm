@@ -35,7 +35,7 @@ begin
       crt "/etc/ssl/#{ns['hostname']}.crt"
       key "/etc/ssl/#{ns['hostname']}.key"
       not_if { ns['hostname'].nil? }
-    end if ns['ssl']
+    end if ns['ssl_enabled']
 
     nginx_site ns['name'] do
       template 'nginx-site.erb'
@@ -55,7 +55,7 @@ begin
       owner node['nginx']['user']
       group node['nginx']['group']
       notifies :reload, 'service[nginx]'
-    end if ns['ssl']
+    end if ns['ssl_enabled']
   end
 rescue Net::HTTPServerException, Chef::Exceptions::InvalidDataBagPath
   log "#{node.name}_nginx data bag not found" do
