@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'yum-mysql-community::mysql55'
+
 # Install mysql2_chef_gem to set up databases
 mysql2_chef_gem 'default'
 
@@ -17,7 +19,11 @@ begin
       bind_address service['bind_address']
       version service['version']
       initial_root_password service['initial_root_password']
-      action [:create, :start]
+      action [:create]
+    end
+    
+    mysql_service service['name'] do 
+      action :start
     end
 
     # Define connection info

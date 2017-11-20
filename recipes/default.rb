@@ -59,3 +59,21 @@ end
 firewall 'default' do
   action [:save, :restart]
 end if rhel?
+
+# Disable SELinux because it breaks things
+if rhel?
+  reboot 'now' do
+    action :nothing
+    reason 'Cannot continue Chef run without a reboot.'
+    delay_mins 1
+  end
+
+  include_recipe 'selinux::_common'
+
+  selinux_state 'SELinux Disabled' do
+    guard_interpreter :bash
+    action :disabled
+    notifies :reboot_now, 'reboot[now]', :immediately
+    not_if "getenforce | grep -qx 'Disabled'"
+  end
+end
