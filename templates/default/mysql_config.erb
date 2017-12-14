@@ -1,0 +1,6 @@
+<% @additional_config.each do |config_section, config| %>
+[<%= config_section %>]
+<% config.each do |setting, value| %>
+<%= setting %> = <%= value %>
+<% end %>
+<% end %>

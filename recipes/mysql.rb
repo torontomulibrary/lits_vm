@@ -26,6 +26,17 @@ begin
       action :start
     end
 
+    # Additional MySQL configuration
+    mysql_config service['name'] do
+      source 'mysql_config.erb'
+      variables(
+        additional_config: service['additional_config']
+      )
+      notifies :restart, "mysql_service[#{service['name']}]"
+      action :create
+      only_if { service.key?('additional_config') }
+    end
+
     # Define connection info
     mysql_connection_info = {
       host:      service['bind_address'],
