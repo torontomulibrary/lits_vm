@@ -29,22 +29,22 @@ include_recipe 'nodejs'
 # Install packages
 package node['lits_vm']['packages']
 
-# Configure sysadmin users
 # Searches data bag "users" for groups attribute "sysadmin".
 # Places returned users in Unix group "sysadmin" with GID 2300.
 users_manage 'sysadmin' do
   group_id 2300
   action [:remove, :create]
 end
-include_recipe 'sudo'
 
-# Configure additional non-sudo users
+# Configure additional user groups
 node['lits_vm']['users']['manage_groups'].each do |group|
   users_manage group do
     action [:remove, :create]
-    data_bag "#{node.name}_users"
   end
 end
+
+# Configure sudo users
+include_recipe 'sudo'
 
 # Configure firewall
 include_recipe 'firewall'
