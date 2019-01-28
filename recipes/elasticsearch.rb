@@ -21,5 +21,3 @@ elasticsearch_configure 'elasticsearch'
 elasticsearch_service 'elasticsearch' do 
   action [ :configure, :start ]
 end
-
-

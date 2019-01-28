@@ -66,6 +66,7 @@ begin
       user['databases'].each do |db_name|
         mysql_database_user user['username'] do
           connection mysql_connection_info
+          password user['password']
           database_name db_name
           privileges [:all]
           action :grant

@@ -4,6 +4,10 @@ default['lits_vm']['firewall']['allow_ports'] = {}
 
 default['lits_vm']['packages'] = %w(curl git)
 
+default['lits_vm']['php']['pecls'] = []
+default['lits_vm']['php']['install_gearman_extension'] = false
+default['lits_vm']['php']['install_apcu_extension'] = false
+
 default['lits_vm']['enable_webtatic'] = false
 
 # sudos

@@ -1,0 +1,7 @@
+; configuration for php <%= @name %> module
+<% @extensions.each do |extension| -%>
+extension=<%= extension %>
+<% end -%>
+<% @directives.each do |k,v| -%>
+<%= "#{@name}.#{k}=#{v}" %>
+<% end -%>

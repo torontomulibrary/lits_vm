@@ -64,7 +64,7 @@ end if rhel?
 if rhel?
   reboot 'now' do
     action :nothing
-    reason 'Cannot continue Chef run without a reboot.'
+    reason 'Cannot continue Chef run without a reboot. Run converge to continue Chef run.'
     delay_mins 1
   end
 
