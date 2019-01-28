@@ -42,6 +42,22 @@ if node['lits_vm']['php']['install_apcu_extension']
   include_recipe 'lits_vm::pecl_apcu'
 end
 
+# Set default socket for pdo_mysql extension
+template "#{node['php']['ext_conf_dir']}/pdo_mysql.ini" do
+  source 'extension.ini.erb'
+  cookbook 'lits_vm'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(
+    name: 'pdo_mysql',
+    extensions: [ 'pdo_mysql.so' ],
+    directives: {
+      'default_socket' => '/var/run/mysql-default/mysqld.sock'
+    }
+  )
+end
+
 # Configure FPM pools
 begin
   search("#{node.name}_bags", 'bag_type:fpm_pool') do |fpm_pool|
