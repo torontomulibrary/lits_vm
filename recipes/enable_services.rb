@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'chef-sugar'
-
 node['lits_vm']['services'].each do |service_name, start_service|
   service service_name do
     action :enable

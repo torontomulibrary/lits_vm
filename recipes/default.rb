@@ -7,14 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
+# SSH Hardening
 include_recipe 'ssh-hardening::server'
 
-# Chef Sugar is a Gem & Chef Recipe that includes series of helpful sugar of
-# the Chef core and other resources to make a cleaner, more lean recipe DSL,
-# enforce DRY principles, and make writing Chef recipes an awesome experience!
-# http://sethvargo.github.io/chef-sugar/
-include_recipe 'chef-sugar'
-
+# Set up package manager for Debian
 include_recipe 'apt' if debian?
 
 # Enable Extra Packages for Enterprise Linux
@@ -22,6 +18,9 @@ if rhel?
   include_recipe 'yum-epel'
   include_recipe 'yum-webtatic' if node['lits_vm']['enable_webtatic']
 end
+
+# Installs required acme-client chef gem
+include_recipe 'acme'
 
 # Install Node.js
 include_recipe 'nodejs'

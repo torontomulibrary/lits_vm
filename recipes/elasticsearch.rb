@@ -7,8 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'chef-sugar'
-
 # Elasticsearch requires java
 include_recipe 'lits_vm::java'
 
