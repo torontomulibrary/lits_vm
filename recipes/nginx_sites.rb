@@ -7,9 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-# Configure nginx sites from data bags
-include_recipe 'acme' # for SSL :)
-
 begin
   search("#{node.name}_bags", 'bag_type:nginx_site') do |site|
     # create log files if missing
