@@ -1,4 +1,5 @@
-default['lits_vm']['users']['manage_groups'] = []
+default['lits_vm']['users'] = []
+default['lits_vm']['user_groups'] = []
 
 default['lits_vm']['firewall']['allow_ports'] = {}
 
