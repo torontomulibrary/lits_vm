@@ -8,7 +8,7 @@
 #
 
 # Download and extract ffmpeg static source
-tar_extract 'http://johnvansickle.com/ffmpeg/releases/ffmpeg-release-64bit-static.tar.xz' do
+tar_extract 'https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz' do
   target_dir '/usr/local'
   compress_char ''
   creates '/usr/local/ffmpeg-3.0-64bit-static'
