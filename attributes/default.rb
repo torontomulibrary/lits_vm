@@ -9,6 +9,7 @@ default['lits_vm']['php']['install_gearman_extension'] = false
 default['lits_vm']['php']['install_apcu_extension'] = false
 
 default['lits_vm']['enable_webtatic'] = false
+default['lits_vm']['install_nodejs'] = false
 
 ## Do not edit below!
 default['firewall']['allow_ssh'] = true

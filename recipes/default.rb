@@ -23,7 +23,7 @@ end
 include_recipe 'acme'
 
 # Install Node.js
-include_recipe 'nodejs'
+include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
 
 # Install packages
 package node['lits_vm']['packages']
