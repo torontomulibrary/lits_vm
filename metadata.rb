@@ -20,7 +20,7 @@ depends 'apt', '>= 0.0.0'
 depends 'yum-epel', '>= 0.0.0'
 depends 'yum-webtatic', '>=0.0.0'
 
-depends 'users', '~> 5.4.0'
+# depends 'users', '~> 5.4.0'
 depends 'sudo', '~> 5.4.4'
 
 depends 'firewall', '~> 2.7.0' 

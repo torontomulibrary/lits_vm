@@ -10,9 +10,6 @@ default['lits_vm']['php']['install_apcu_extension'] = false
 
 default['lits_vm']['enable_webtatic'] = false
 
-# sudos
-default['authorization']['sudo']['groups'] = ['sysadmin']
-
 ## Do not edit below!
 default['firewall']['allow_ssh'] = true
 default['firewall']['firewalld']['permanent'] = true
