@@ -4,7 +4,7 @@ maintainer_email 'patrick@makestuffdostuff.com'
 license          'All rights reserved'
 description      'Configures a base VM for installing applications'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.7.0'
+version          '1.0.0'
 
 depends 'sshd', '~> 2.0.0'
 depends 'ssh-hardening', '~> 2.7.0'
