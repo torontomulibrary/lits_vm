@@ -21,11 +21,11 @@ end
 # Compile pecl-gearman extension from source
 execute 'compile-pecl-gearman' do
   cwd "#{Chef::Config['file_cache_path']}/pecl-gearman"
-  command "phpize && ./configure && make && make install"
-  creates "/usr/lib64/php/modules/gearman.so"
+  command 'phpize && ./configure && make && make install'
+  creates "#{node['php']['ext_dir']}/gearman.so"
 end
 
 # Enable gearman php extension
-template "/etc/php.d/gearman.ini" do
+template "#{node['php']['ext_conf_dir']}/gearman.ini" do
   source 'gearman.ini'
 end
