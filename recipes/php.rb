@@ -80,6 +80,7 @@ service node['php']['fpm_service'] do
 end
 
 # make sure the session dir is read/writeable by www user
-directory '/var/lib/php/session' do
+directory "#{node['lits_vm']['php']['fpm_session_dir']}" do
+  recursive true
   group node['php']['fpm_group']
 end
