@@ -17,6 +17,7 @@ include_recipe 'apt' if debian?
 if rhel?
   include_recipe 'yum-epel'
   include_recipe 'yum-webtatic' if node['lits_vm']['enable_webtatic']
+  package 'centos-release-scl' if node['lits_vm']['enable_scl']
 end
 
 # Installs required acme-client chef gem
