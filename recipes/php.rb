@@ -12,7 +12,7 @@ include_recipe 'php'
 
 # Install PECLs
 node['lits_vm']['php']['pecls'].each do |pecl|
-  php_pear pecl do
+  lits_vm_pear pecl do
     action :install
     binary "pecl"
   end

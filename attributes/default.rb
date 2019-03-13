@@ -5,7 +5,7 @@ default['lits_vm']['firewall']['allow_ports'] = {}
 
 default['lits_vm']['packages'] = %w(curl git)
 
-default['lits_vm']['enable_scl'] = false
+default['lits_vm']['scls'] = nil
 default['lits_vm']['enable_webtatic'] = false
 default['lits_vm']['install_nodejs'] = false
 

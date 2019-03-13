@@ -17,7 +17,18 @@ include_recipe 'apt' if debian?
 if rhel?
   include_recipe 'yum-epel'
   include_recipe 'yum-webtatic' if node['lits_vm']['enable_webtatic']
-  package 'centos-release-scl' if node['lits_vm']['enable_scl']
+
+  # Install and enable SCLs if we need them
+  package 'centos-release-scl' if node['lits_vm']['scls']
+  package node['lits_vm']['scls'] if node['lits_vm']['scls']
+  node['lits_vm']['scls'].each do |scl|
+    file "/etc/profile.d/#{scl}.sh" do
+      content "source scl_source enable #{scl}"
+      mode '0644'
+      owner 'root'
+      group 'root'
+    end
+  end
 end
 
 # Installs required acme-client chef gem
@@ -25,6 +36,8 @@ include_recipe 'acme'
 
 # Install Node.js
 include_recipe 'nodejs' if node['lits_vm']['install_nodejs']
+
+# package %w(gcc)
 
 # Install packages
 package node['lits_vm']['packages']
