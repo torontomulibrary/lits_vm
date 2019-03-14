@@ -79,8 +79,9 @@ service node['php']['fpm_service'] do
   action :restart
 end
 
-# make sure the session dir is read/writeable by www user
-directory "#{node['lits_vm']['php']['fpm_session_dir']}" do
+# PHP expects the session dir to be at /var/lib/php/session. Create it.
+directory "/var/lib/php/session" do
   recursive true
+  owner node['php']['fpm_user']
   group node['php']['fpm_group']
 end
